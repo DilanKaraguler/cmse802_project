@@ -36,13 +36,13 @@ def read_file_mol(filename):
 def read_file_new(data_set):
     '''Converts the given data set which is list of dict of molecules
      to a pointcloud with atom type information'''
-    pointcloud = []
+    pointcloud=[]
     atom_types = []
-    y = [molecule['y'] for molecule in data_set]
-    locations = [molecule['pos'] for molecule in data_set]
-    idx =[molecule['z']for molecule in data_set]
-    for locs, atom_name_info in zip(locations, idx):
-        pointcloud.append(locs.tolist())
-        atom_types.append(atom_name_info.tolist())
+    y = [molecule['y'] for molecule in data]
+    locations = [molecule['pos'] for molecule in data]
+    idx =[molecule['z']for molecule in data]
+    for locs, atoms in zip(locations, idx):
+        pointcloud.append(locs)
+        atom_types.append(atom_name)
 
     return pointcloud, atom_types

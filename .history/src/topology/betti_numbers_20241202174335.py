@@ -1,5 +1,5 @@
 import numpy as np
-from boundary_maps import boundary_operators 
+
 
 
 def matrix_rank(A):

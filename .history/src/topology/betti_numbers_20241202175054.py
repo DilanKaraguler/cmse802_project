@@ -1,5 +1,5 @@
 import numpy as np
-
+from boundary_maps import boundary_operators 
 
 
 def matrix_rank(A):
@@ -85,17 +85,79 @@ def calculate_betti_laplacian(bnd_op,N,q):
 def betti_laplacian(X,N,max_dim=2):
     '''Computes betti and laplacian information for the given complex=X for each Mayer order q<N'''
     Bettis=[]
-    Gmin=[]
-    Gmax=[]
-    Gmean=[]
-    Gstd=[]
+    #Gmin=[]
+    #Gmax=[]
+    #Gmean=[]
+    #Gstd=[]
     bnd_op = boundary_operators(X,N)
     for q in range(1,N):
         betti, gmin,gmax,gmean,gstd = calculate_betti_laplacian(bnd_op,N,q)
         Bettis.append(betti)
-        Gmin.append(gmin)
-        Gmax.append(gmax)
-        Gmean.append(gmean)
-        Gstd.append(gstd)
-    return Bettis,Gmin,Gmax,Gmean,Gstd
+        #Gmin.append(gmin)
+        #Gmax.append(gmax)
+        #Gmean.append(gmean)
+        #Gstd.append(gstd)
+    return Bettis #,Gmin,Gmax,Gmean,Gstd
+
+def calculate2(path_complex, distances,N):
+     B = {}
+     #Gmin = {}
+     #Gmax = {}
+     #Gmean = {}
+     #Gstd = {}
+     pre_complex_num = 0
+     #start = time.time()
+     path = path_complex
+     #B stores betti numbers for each distance so len(B)=len(distances)
+     for i,distance in enumerate(distances):
+         
+         cur_complex = path.get_complex(distance)
+         if len(cur_complex) == pre_complex_num:
+             B[distance] = B[distances[i-1]]
+#             Gmin[distance] = Gmin[distances[i-1]]
+#             Gmax[distance] = Gmax[distances[i-1]]
+#             Gmean[distance] = Gmean[distances[i-1]]
+#             Gstd[distance] = Gstd[distances[i-1]]
+         else:
+            
+             B[distance] = betti_laplacian(cur_complex,N)
+             #,Gmin[distance],Gmax[distance],Gmean[distance],Gstd[distance] = betti_laplacian(cur_complex,N)
+             
+         pre_complex_num = len(cur_complex)
+     for i in range(N-1):
+         b0=[]
+         b1=[]
+#         gmin0= []
+#         gmin1 = []
+#         gmax0 = []
+#         gmax1 = []
+#         gmean0=[]
+#         gmean1=[]
+#         gstd0=[]
+#         gstd1=[]
+         betti = []
+#         gmin = []
+#         gmax = []
+#         gmean = []
+#         gstd = []
+         for distance in distances:
+             betti = B[distance][i]
+#             gmin = Gmin[distance][i]
+#             gmax = Gmax[distance][i]
+#             gmean = Gmean[distance][i]
+#             gstd = Gstd[distance][i]
+             b0.append(betti[0] if len(betti)>0 else 0)
+             b1.append(betti[1] if len(betti)>1 else 0)
+#             gmin0.append(gmin[0] if len(gmin)>0 else 0)
+#             gmin1.append(gmin[1] if len(gmin)>1 else 0)
+#             gmax0.append(gmax[0] if len(gmax)>0 else 0)
+#             gmax1.append(gmax[1] if len(gmax)>1 else 0)
+#             gmean0.append(gmean[0] if len(gmean)>0 else 0)
+#             gmean1.append(gmean[1] if len(gmean)>1 else 0)
+#             gstd0.append(gstd[0] if len(gstd)>0 else 0)
+#             gstd1.append(gstd[1] if len(gstd)>1 else 0)
+         
+#         print('Betti0 over distances for q=', i+1,'and N=',N, 'is', b0)
+#         print('Betti1 over distances for q=', i+1,'and N=',N, 'is', b1) 
+     return b0 , b1
 

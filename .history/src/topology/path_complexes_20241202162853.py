@@ -1,8 +1,8 @@
 import numpy as np
 import gudhi
 import cmath
-import Path_Mayer_Homology_Laplacian
-from Path_Mayer_Homology_Laplacian import get_faces
+import boundary_maps
+from boundary_maps import get_faces
 # The difference betweeen alpha and Rips,
 # Alpha is a subcomplex of Delunay triangulation so there are no crossing where Rips contains crossings too. 
 

@@ -1,5 +1,5 @@
 def read_file(filename):
-'''Converts given file (mol2, xyz, xy) to a pointcloud'''
+    '''Converts given file (mol2, xyz, xy) to a pointcloud'''
     file_format = filename.split('.')[-1]
     pointcloud=[]
     if file_format == 'mol2':

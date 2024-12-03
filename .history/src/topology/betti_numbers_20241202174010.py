@@ -1,5 +1,5 @@
 import numpy as np
-from boundary_maps import boundary_operators 
+
 
 
 def matrix_rank(A):
@@ -106,7 +106,7 @@ def calculate2(path_complex, distances,N):
      #Gmean = {}
      #Gstd = {}
      pre_complex_num = 0
-     #start = time.time()
+     start = time.time()
      path = path_complex
      #B stores betti numbers for each distance so len(B)=len(distances)
      for i,distance in enumerate(distances):

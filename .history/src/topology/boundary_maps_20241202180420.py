@@ -87,7 +87,7 @@ def boundary(complex,N):
             faces = get_faces(sigma)
             mtx.append([get_coeff(spx, faces,N) for spx in spx_k])
         bnd.append(np.array(mtx).T)
-    #print(bnd)
+    
     for ekstra in to_be_deleted:
             
             nested_dim = len(ekstra)-1
@@ -102,17 +102,14 @@ def boundary(complex,N):
             spx1 = nested_pair[1]
             nested_dim = len(spx0)-1
             idx1 = simplices[nested_dim].index(spx0)
-
-
             idx2 = simplices[nested_dim].index(spx1)
             bnd[nested_dim][:, idx1] -= bnd[nested_dim][:, idx2]
             bnd[nested_dim]=np.delete(bnd[nested_dim],idx2, axis=1)
             
-            if len(bnd) - 1 > nested_dim:
-                idx3 = simplices[nested_dim].index(spx1)
-                #print(len(bnd),nested_dim)  
-                #print('nested_dim+1',nested_dim+1,'row number',len(bnd[nested_dim+1]),'idx3',idx3)
-                bnd[nested_dim+1]=np.delete(bnd[nested_dim+1],idx3, axis=0)
+            if len(bnd) - 1 >= nested_dim:
+                #idx2 = simplices[nested_dim].index(nested_pair[1])
+                print(len(bnd),nested_dim)  
+                bnd[nested_dim+1]=np.delete(bnd[nested_dim+1],idx2, axis=0)
             simplices[nested_dim].remove(spx1)
 
     return bnd
