@@ -3,6 +3,8 @@ import gudhi
 import cmath
 import boundary_maps
 from boundary_maps import get_faces
+# The difference betweeen alpha and Rips,
+# Alpha is a subcomplex of Delunay triangulation so there are no crossing where Rips contains crossings too. 
 
 class path_complex_alpha():
     '''Computes the path complex for a given point cloud 

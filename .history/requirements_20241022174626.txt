@@ -1,5 +1,0 @@
-This project needs the following packages:
-- numpy
-- cmath
-- gudhi
-- matplotlib
